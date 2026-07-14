@@ -17,7 +17,7 @@
     /* Linting */
     "noUnusedLocals": false, // подсказки о неиспользуемых переменных
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false, // позволяет работать с энамами, что бы не появлялось ничего лишнего в JS в результате работы с типизацией
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
