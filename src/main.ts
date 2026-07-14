@@ -1,87 +1,118 @@
-// enum Role {
-//   Admin = 'admin',
-//   Guest = 'guest',
-//   User = 'user'
-// }
+// // enum Role {
+// //   Admin = 'admin',
+// //   Guest = 'guest',
+// //   User = 'user'
+// // }
 
-// function handleGreetMessage(role: Role, name: string): string {
-//   switch (role) {
-//     case Role.Admin:
-//       return `Hello Admin, ${name}`
-//     case Role.Guest:
-//       return `Hello Guest, ${name}`
-//     case Role.User:
-//       return `Hello ${name}`
-//   }
-// }
+// // function handleGreetMessage(role: Role, name: string): string {
+// //   switch (role) {
+// //     case Role.Admin:
+// //       return `Hello Admin, ${name}`
+// //     case Role.Guest:
+// //       return `Hello Guest, ${name}`
+// //     case Role.User:
+// //       return `Hello ${name}`
+// //   }
+// // }
 
-// handleGreetMessage(Role.Admin, 'Dmytro');
+// // handleGreetMessage(Role.Admin, 'Dmytro');
 
-//! =========================================
+// //! =========================================
 
-// Задача 1. Узагальнена функція wrapInArray
-// Умова
+// // Задача 1. Узагальнена функція wrapInArray
+// // Умова
 
-// Є функція:
+// // Є функція:
 
-// function wrapInArray(value) {
+// // function wrapInArray(value) {
+// //   return [value];
+// // }
+
+// // Зараз вона не типізована.
+
+// // Завдання
+
+// // Зроби функцію узагальненою
+
+// function wrapInArray<T>(value: T): T[] {
 //   return [value];
 // }
 
-// Зараз вона не типізована.
+// wrapInArray<number>(1);
 
-// Завдання
+// //! =========================================
 
-// Зроби функцію узагальненою
+// // Задача 2. Узагальнена функція getLastElement
+// // Умова
 
-function wrapInArray<T>(value: T): T[] {
-  return [value];
-}
+// // Створи функцію getLastElement, яка:
 
-wrapInArray<number>(1);
+// // приймає масив будь-якого типу
 
-//! =========================================
+// // повертає останній елемент масиву
 
-// Задача 2. Узагальнена функція getLastElement
-// Умова
+// // Зроби функцію узагальненою.
 
-// Створи функцію getLastElement, яка:
+// function getLastElement<T>(array: T[]): T {
+//   return array[array.length - 1];
+// }
 
-// приймає масив будь-якого типу
+// getLastElement<string | number>(['1', 2, '3']);
 
-// повертає останній елемент масиву
+// //! =========================================
 
-// Зроби функцію узагальненою.
+// // Задача 3. Узагальнена функція pair
+// // Умова
 
-function getLastElement<T>(array: T[]): T {
-  return array[array.length - 1];
-}
+// // Створи функцію pair, яка:
 
-getLastElement<string | number>(['1', 2, '3']);
+// // приймає два значення, які можуть бути різного типу
 
-//! =========================================
+// // повертає їх як 1) масив /  2)кортеж
 
-// Задача 3. Узагальнена функція pair
-// Умова
+// // Зроби функцію узагальненою
 
-// Створи функцію pair, яка:
+// //!variant 1
 
-// приймає два значення, які можуть бути різного типу
+// function pair1<T, Y>(value1: T, value2: Y): (T | Y)[] {
+//   return [value2, value1];
+// }
 
-// повертає їх як 1) масив /  2)кортеж
+// pair1<number, string>(123, 'str');
 
-// Зроби функцію узагальненою
+// //!variant 2
 
-//!variant 1
+// function pair2<T, Y>(value1: T, value2: Y): [T, Y] {
+//   return [value1, value2];
+// }
 
-function pair1<T, Y>(value1: T, value2: Y): (T | Y)[] {
-  return [value2, value1];
-}
+// // //! =========================================
 
-pair1<number, string>(123, 'str');
+// // Задача 5. Узагальнена функція firstOrDefault
+// // Умова
+// // Створи функцію firstOrDefault, яка:
+// // приймає масив будь-якого типу
+// // повертає перший елемент масиву або null, якщо масив порожній
+// // зроби функцію узагальненою
 
-//!variant 2
+// function firstOrDefault<T>(array: T[]): T | null{
+//   if (array.length === 0){
+//     return null
+//   }
+//   return array[0]
 
-function pair2<T, Y>(value1: T, value2: Y): [T, Y] {
-  return [value1, value2];
-}
+//   // // solution 2
+//   // return array[0] ?? null
+// }
+
+// console.log(firstOrDefault<number>([1,2,3]));
+// console.log(firstOrDefault<number>([]));
+// console.log(firstOrDefault<number>([undefined]));
+
+
+// ============
+
+const names: string[] = ["Alice", "Bob"];
+const name = names[5]
+
+name.toUpperCase(); // ❌ Error: Object is possibly 'undefined'.
