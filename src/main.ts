@@ -111,8 +111,3 @@
 
 
 // ============
-
-const names: string[] = ["Alice", "Bob"];
-const name = names[5]
-
-name.toUpperCase(); // ❌ Error: Object is possibly 'undefined'.
