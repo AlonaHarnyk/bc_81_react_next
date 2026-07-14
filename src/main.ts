@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 // // enum Role {
 // //   Admin = 'admin',
@@ -113,9 +113,9 @@ import axios from "axios";
 
 // // ============
 
-interface User {
-  name: string;
-}
+// interface User {
+//   name: string;
+// }
 
 // interface Responce<T> {
 //   status: number;
@@ -201,21 +201,46 @@ interface User {
 // якщо масиви різної довжини, ігнорує зайві елементи
 // зроби функцію узагальненою
 
-function zip<T, U>(arr1: T[], arr2: U[]): [T, U][] {
-  const len = Math.min(arr1.length, arr2.length);
+// function zip<T, U>(arr1: T[], arr2: U[]): [T, U][] {
+//   const len = Math.min(arr1.length, arr2.length);
 
-  const result: [T, U][] = [];
+//   const result: [T, U][] = [];
 
-  for (let i = 0; i < len; i += 1) {
-    result.push([arr1[i], arr2[i]]);
-  }
+//   for (let i = 0; i < len; i += 1) {
+//     result.push([arr1[i], arr2[i]]);
+//   }
 
+//   return result;
+// }
+
+// // Приклад використання:
+
+// const numbers = [1, 2, 3];
+// const strings = ["a", "b"];
+// const zipped = zip(numbers, strings); // [[1,"a"], [2,"b"]]
+// console.log("🚀 ~ zipped:", zipped);
+
+//! Задача 10. Узагальнені функції saveToStorage і loadFromStorage
+// Умова
+// Створи дві функції:
+// 1) saveToStorage
+// приймає ключ
+// приймає значення будь-якого типу
+// зберігає його у localStorage у форматі JSON
+// 2) loadFromStorage
+// приймає ключ
+// повертає значення
+// Зроби обидві функції узагальненими.
+
+function saveToStorage<T>(key: string, value: T): void {
+  const data = JSON.stringify(value);
+  localStorage.setItem(key, data);
+}
+saveToStorage('first', 25);
+
+function loadFromStorage<T>(key: string): T | null {
+  const data = localStorage.getItem(key);
+  const result = data !== null ? JSON.parse(data) : null;
   return result;
 }
-
-// Приклад використання:
-
-const numbers = [1, 2, 3];
-const strings = ["a", "b"];
-const zipped = zip(numbers, strings); // [[1,"a"], [2,"b"]]
-console.log("🚀 ~ zipped:", zipped);
+console.log(loadFromStorage<number>('first'));
