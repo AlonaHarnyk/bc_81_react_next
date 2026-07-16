@@ -4,16 +4,18 @@ interface StudentProps {
   student: Student;
 }
 
-export default function StudentItem({ student }: StudentProps) {
+export default function StudentItem({
+  student: { avatar, age, name, course, isOnline },
+}: StudentProps) {
   return (
     <>
-      <img src={student.avatar} alt={student.name} />
-      <h2>{student.name}</h2>
-      <p>Age: {student.age}</p>
-      <p>Course: {student.course}</p>
-      {/* <p>Is online: {student.isOnline ? "yes" : "no"}</p> */}
-      {/* {student.isOnline ? <p> Online </p> : <p> Offline </p>} */}
-      {student.isOnline && <p>User is online</p>}
+      <img src={avatar} alt={name} />
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Course: {course}</p>
+      {/* <p>Is online: isOnline ? "yes" : "no"}</p> */}
+      {/* {isOnline ? <p> Online </p> : <p> Offline </p>} */}
+      {isOnline && <p>User is online</p>}
     </>
   );
 }
