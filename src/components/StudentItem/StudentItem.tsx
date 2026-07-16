@@ -1,4 +1,4 @@
-import type { Student } from "../../types";
+import type { Student } from '../../types';
 
 interface StudentProps {
   student: Student;
@@ -6,7 +6,7 @@ interface StudentProps {
 
 export default function StudentItem({ student }: StudentProps) {
   return (
-    <div>
+    <>
       <img src={student.avatar} alt={student.name} />
       <h2>{student.name}</h2>
       <p>Age: {student.age}</p>
@@ -14,6 +14,6 @@ export default function StudentItem({ student }: StudentProps) {
       {/* <p>Is online: {student.isOnline ? "yes" : "no"}</p> */}
       {/* {student.isOnline ? <p> Online </p> : <p> Offline </p>} */}
       {student.isOnline && <p>User is online</p>}
-    </div>
+    </>
   );
 }

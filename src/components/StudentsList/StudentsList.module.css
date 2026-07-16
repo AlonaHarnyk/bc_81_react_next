@@ -1,0 +1,11 @@
+.studentList {
+    display: flex;
+    justify-content: space-between;
+}
+
+.studentItem{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid black;
+}
