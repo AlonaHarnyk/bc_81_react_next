@@ -1,7 +1,6 @@
-import { students } from '../../data/data';
-import Student from '../Student/Student';
+import { students } from "../../data/data";
+import StudentItem from "../Student/Student";
 const student = students[0];
 export default function App() {
-  return <Student student={student} />;
+  return <StudentItem student={student} />;
 }
-console.log(students);
