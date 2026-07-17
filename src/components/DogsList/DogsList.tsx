@@ -1,16 +1,17 @@
-import type { Dog } from "../../types";
-import DogItem from "../DogItem/DogItem";
+import type { Dog } from '../../types';
+import DogItem from '../DogItem/DogItem';
 
 interface DogsListProps {
   dogs: Dog[];
+  handleDelete: (id: number) => void;
 }
 
-export default function DogsList({ dogs }: DogsListProps) {
+export default function DogsList({ dogs, handleDelete }: DogsListProps) {
   return (
     <ul>
-      {dogs.map((dog) => (
+      {dogs.map(dog => (
         <li key={dog.id}>
-          <DogItem dog={dog} />
+          <DogItem dog={dog} handleDelete={handleDelete} />
         </li>
       ))}
     </ul>

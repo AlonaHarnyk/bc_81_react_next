@@ -9,6 +9,10 @@ export default function App() {
   const toggleShowDogList = () => {
     setIsDogListVisible(!isDogListVisible);
   };
+  const deleteDog = (id: number) => {
+    const updatedDogs = dogs.filter(dog => dog.id !== id);
+    setDogs(updatedDogs);
+  };
   return (
     <>
       <Button
@@ -16,7 +20,7 @@ export default function App() {
         textContent={isDogListVisible ? 'Hide dogs list' : 'Show dog list'}
         handleClick={toggleShowDogList}
       />
-      {isDogListVisible && <DogsList dogs={dogs} />}
+      {isDogListVisible && <DogsList dogs={dogs} handleDelete={deleteDog} />}
     </>
   );
 }
