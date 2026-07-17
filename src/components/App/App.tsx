@@ -1,8 +1,12 @@
-import { students } from '../../data/data';
-// import StudentItem from "../Student/Student";
-import StudentList from '../StudentsList/StudentsList';
-// const student = students[0];
+import { useState } from "react";
+
+import { initialDogs } from "../../data/dogs";
+import DogsList from "../DogsList/DogsList";
+
 export default function App() {
-  // return <StudentItem student={student} />;
-  return <StudentList students={students} />;
+  const [dogs, setDogs] = useState(initialDogs);
+
+  return (
+    <DogsList dogs={dogs} />
+  );
 }
