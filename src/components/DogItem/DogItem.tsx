@@ -5,9 +5,14 @@ import AddressInfo from '../Address/Address';
 interface DogItemProps {
   dog: Dog;
   handleDelete: (id: number) => void;
+  handleToggle: (id: number) => void;
 }
 
-export default function DogItem({ dog, handleDelete }: DogItemProps) {
+export default function DogItem({
+  dog,
+  handleDelete,
+  handleToggle,
+}: DogItemProps) {
   const [isAddressVisible, setIsAddressVisible] = useState(false);
 
   const showAddress = () => {
@@ -18,12 +23,21 @@ export default function DogItem({ dog, handleDelete }: DogItemProps) {
     handleDelete(dog.id);
   };
 
+  const onToggle = () => {
+    handleToggle(dog.id);
+  };
+
+  // const toggleFriendly = () => {
+  //   setFriendly(!isFriendly);
+  // };
+
   return (
     <>
       <img src={dog.avatar} alt={dog.name} />
       <h2>{dog.name}</h2>
       <p>Age: {dog.age}</p>
       <p>Breed: {dog.breed}</p>
+      {dog.isFriendly ? <p>isFriendly: Yes</p> : <p>isFriendly: No</p>}
       <Button type="button" textContent="Delete" handleClick={onDelete} />
 
       {isAddressVisible ? (
@@ -35,6 +49,12 @@ export default function DogItem({ dog, handleDelete }: DogItemProps) {
           handleClick={showAddress}
         />
       )}
+      <Button
+        type="button"
+        textContent="Toggle Friendly"
+        handleClick={onToggle}
+      />
     </>
   );
 }
+// Додати до компонента елемента списку кнопку Change status of friendliness , при натисканні на яку статус тварини має змінюватись на протилежний.
