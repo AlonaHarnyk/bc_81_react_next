@@ -7,8 +7,8 @@ interface AddUserFormProps {
 export default function AddUserForm({ onClose }: AddUserFormProps) {
   const formId = useId();
   const handleSubmit = (formData: FormData) => {
-    const name = formData.get('userName');
-    const email = formData.get('userEmail');
+    const name = formData.get('userName') as string;
+    const email = formData.get('userEmail') as string;
     console.log({ name, email });
     onClose();
   };
