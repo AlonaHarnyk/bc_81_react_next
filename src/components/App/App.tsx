@@ -1,22 +1,26 @@
 import { useState } from 'react';
+import { getUsers } from '../../services/api';
 import Button from '../Button/Button';
-import { initialDogs } from '../../data/dogs';
-import DogsList from '../DogsList/DogsList';
-
+import type { User } from '../../types';
+import UserList from '../UserList/UserList';
 export default function App() {
-  const [dogs, setDogs] = useState(initialDogs);
-  const [isDogListVisible, setIsDogListVisible] = useState(false);
-  const toggleShowDogList = () => {
-    setIsDogListVisible(!isDogListVisible);
+  const [users, setUsers] = useState<User[]>([]);
+  const showUsers = async () => {
+    const data = await getUsers();
+    setUsers(data);
   };
+
   return (
     <>
-      <Button
-        type="button"
-        textContent={isDogListVisible ? 'Hide dogs list' : 'Show dog list'}
-        handleClick={toggleShowDogList}
-      />
-      {isDogListVisible && <DogsList dogs={dogs} />}
+      {users.length > 0 ? (
+        <UserList users={users} />
+      ) : (
+        <Button
+          type="button"
+          textContent="Show users"
+          handleClick={showUsers}
+        />
+      )}
     </>
   );
 }
