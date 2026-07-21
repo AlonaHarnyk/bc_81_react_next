@@ -1,10 +1,10 @@
-import { use, useEffect, useState } from "react";
-import type { Book } from "../../types";
-import { getBooks } from "../../services/booksApi";
-import BooksList from "../BooksList/BooksList";
-import Loader from "../Loader/Loader";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import Modal from "../Modal/Modal";
+import { use, useEffect, useState } from 'react';
+import type { Book } from '../../types';
+import { getBooks } from '../../services/booksApi';
+import BooksList from '../BooksList/BooksList';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Modal from '../Modal/Modal';
 
 export default function Books() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -35,11 +35,11 @@ export default function Books() {
 
   return (
     <>
-      <BooksList books={books} onOpenModal={openModal} />
+      {books.length > 0 && <BooksList books={books} onOpenModal={openModal} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {modalContent && (
-        <Modal onClose={()=>setModalContent(null)}>
+        <Modal onClose={() => setModalContent(null)}>
           <p> {modalContent} </p>
         </Modal>
       )}
