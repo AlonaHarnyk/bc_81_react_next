@@ -4,3 +4,11 @@ export interface User {
   isOnline: boolean;
   id: string;
 }
+
+export interface Book {
+  author: string;
+  title: string;
+  year: string;
+  description: string;
+  id: string;
+}
