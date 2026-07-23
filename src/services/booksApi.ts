@@ -5,9 +5,13 @@ const booksApi = axios.create({
   baseURL: "https://6971cf4a32c6bacb12c49096.mockapi.io",
 });
 
-export const getBooks = async (search: string): Promise<Book[]> => {
+export const getBooks = async (search: string, page: number): Promise<Book[]> => {
   const { data } = await booksApi.get<Book[]>("/books", {
-    params: { search: search },
+    params: {
+      search: search,
+      page,
+      limit: 3
+    },
   });
   return data;
 };

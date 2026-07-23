@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
-import type { Book } from "../../types";
-import { getBooks } from "../../services/booksApi";
-import BooksList from "../BooksList/BooksList";
-import Loader from "../Loader/Loader";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import Modal from "../Modal/Modal";
-import { useQuery } from "@tanstack/react-query";
-import BooksForm from "../BooksForm/BooksForm";
-import NoDataScreen from "../../NoDataScreen/NoDataScreen";
+import { useState } from 'react';
+// import type { Book } from '../../types';
+import { getBooks } from '../../services/booksApi';
+import BooksList from '../BooksList/BooksList';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Modal from '../Modal/Modal';
+import { useQuery } from '@tanstack/react-query';
+import BooksForm from '../BooksForm/BooksForm';
+import NoDataScreen from '../../NoDataScreen/NoDataScreen';
+import Pagination from '../Pagination/Pagination';
 
 export default function Books() {
   const [modalContent, setModalContent] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const openModal = (description: string) => {
     setModalContent(description);
@@ -19,6 +21,7 @@ export default function Books() {
 
   const onSearch = (query: string) => {
     setQuery(query);
+    setCurrentPage(1);
   };
 
   const {
@@ -26,12 +29,26 @@ export default function Books() {
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ["books", query],
-    queryFn: () => getBooks(query),
+    queryKey: ['books', query, currentPage],
+    queryFn: () => getBooks(query, currentPage),
   });
+
+  const totalPages = 6;
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
+      {books && totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      )}
+
       <BooksForm onSerch={onSearch} />
       {books && books.length > 0 && !isLoading ? (
         <BooksList books={books} onOpenModal={openModal} />
