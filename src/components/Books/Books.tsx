@@ -1,41 +1,44 @@
-import { use, useEffect, useState } from 'react';
-import type { Book } from '../../types';
-import { getBooks } from '../../services/booksApi';
-import BooksList from '../BooksList/BooksList';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import Modal from '../Modal/Modal';
+import { useEffect, useState } from "react";
+import type { Book } from "../../types";
+import { getBooks } from "../../services/booksApi";
+import BooksList from "../BooksList/BooksList";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Modal from "../Modal/Modal";
+import { useQuery } from "@tanstack/react-query";
+import BooksForm from "../BooksForm/BooksForm";
+import NoDataScreen from "../../NoDataScreen/NoDataScreen";
 
 export default function Books() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
   const [modalContent, setModalContent] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   const openModal = (description: string) => {
     setModalContent(description);
   };
 
-  useEffect(() => {
-    const handleGetBooks = async () => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        const booksData = await getBooks();
-        setBooks(booksData);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    handleGetBooks();
-  }, []);
+  const onSearch = (query: string) => {
+    setQuery(query);
+  };
+
+  const {
+    data: books,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["books", query],
+    queryFn: () => getBooks(query),
+  });
 
   return (
     <>
-      {books.length > 0 && <BooksList books={books} onOpenModal={openModal} />}
+      <BooksForm onSerch={onSearch} />
+      {books && books.length > 0 && !isLoading ? (
+        <BooksList books={books} onOpenModal={openModal} />
+      ) : (
+        <NoDataScreen />
+      )}
+
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {modalContent && (
