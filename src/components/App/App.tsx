@@ -2,8 +2,10 @@ import Users from '../Users/Users';
 import Books from '../Books/Books';
 import { useState } from 'react';
 import Tabs from '../Tabs/Tabs';
+import Contacts from '../Contacts/Contacts';
 
-type TabType = 'users' | 'books';
+
+type TabType = 'users' | 'books' | 'contacts';
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('users');
 
@@ -20,6 +22,12 @@ export default function App() {
         setActiveTab('books');
       },
     },
+    {
+      textContent: 'Contacts',
+      clickHandler: () => {
+        setActiveTab('contacts');
+      },
+    },
   ];
 
   return (
@@ -27,8 +35,10 @@ export default function App() {
       <Tabs tabs={tabsConfig} />
       {activeTab === 'users' && <Users />}
       {activeTab === 'books' && <Books />}
+      {activeTab === 'contacts' && <Contacts />}
       {/* <Books /> */}
       {/* <Users /> */}
+      {/* <Contacts /> */}
     </>
   );
 }

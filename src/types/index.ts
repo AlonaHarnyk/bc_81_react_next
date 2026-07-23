@@ -12,3 +12,12 @@ export interface Book {
   description: string;
   id: string;
 }
+
+export interface Contact {
+      
+    name: string,
+    city: string,
+    job: string,
+    email: string,
+    id: string,
+}
