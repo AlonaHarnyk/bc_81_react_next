@@ -1,24 +1,41 @@
-import { useId } from 'react';
+import { Field, Form, Formik } from "formik";
+import { useId } from "react";
 
 interface AddUserFormProps {
   onClose: () => void;
 }
 
+interface FormValues {
+  name: string;
+  email: string;
+}
+
+const initialValues: FormValues = {
+  name: "",
+  email: "",
+};
+
 export default function AddUserForm({ onClose }: AddUserFormProps) {
-  const formId = useId();
-  const handleSubmit = (formData: FormData) => {
-    const name = formData.get('userName') as string;
-    const email = formData.get('userEmail') as string;
-    console.log({ name, email });
-    onClose();
+  const handleSubmit = (values: FormValues) => {
+    console.log(values);
+    onClose()
   };
+
   return (
-    <form action={handleSubmit}>
-      <label htmlFor={`${formId}-userName`}>Enter name</label>
-      <input type="text" name="userName" id={`${formId}-userName`} />
-      <label htmlFor={`${formId}-userEmail`}>Enter email</label>
-      <input type="email" name="userEmail" id={`${formId}-userEmail`} />
-      <button type="submit">Submit Form</button>
-    </form>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Form>
+        <label>
+          Enter name
+          <Field type="text" name="name" />
+        </label>
+
+        <label>
+          Enter email
+          <Field type="email" name="email" />
+        </label>
+
+        <button type="submit">Submit Form</button>
+      </Form>
+    </Formik>
   );
 }
