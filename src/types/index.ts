@@ -14,10 +14,17 @@ export interface Book {
 }
 
 export interface Contact {
-      
-    name: string,
-    city: string,
-    job: string,
-    email: string,
-    id: string,
+  id: string;
+
+  name: string;
+  city: string;
+  job: string;
+  number: string;
+  email: string;
+
+  hasWork: boolean;
+  sex: string;
+
+  hobbies: string[];
+  description: string;
 }

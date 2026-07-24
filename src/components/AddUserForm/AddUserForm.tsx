@@ -1,5 +1,7 @@
-import { Field, Form, Formik } from "formik";
-import { useId } from "react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+
+import css from "./AddUserForm.module.css";
 
 interface AddUserFormProps {
   onClose: () => void;
@@ -15,27 +17,56 @@ const initialValues: FormValues = {
   email: "",
 };
 
+const schema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Name must be least 2 characters")
+    .required("Name is required"),
+  email: Yup.string()
+    .email("Email must be valid")
+    .required("Email is required"),
+});
+
 export default function AddUserForm({ onClose }: AddUserFormProps) {
   const handleSubmit = (values: FormValues) => {
     console.log(values);
-    onClose()
+    onClose();
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form>
-        <label>
-          Enter name
-          <Field type="text" name="name" />
-        </label>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={schema}
+    >
+      {({ errors }) => {
+        console.log(errors);
 
-        <label>
-          Enter email
-          <Field type="email" name="email" />
-        </label>
+        return (
+          <Form>
+            <label>
+              Enter name
+              <Field type="text" name="name" />
+              <ErrorMessage
+                component="span"
+                name="name"
+                className={css.error}
+              />
+            </label>
 
-        <button type="submit">Submit Form</button>
-      </Form>
+            <label>
+              Enter email
+              <Field type="email" name="email" />
+              <ErrorMessage
+                component="span"
+                name="email"
+                className={css.error}
+              />
+            </label>
+
+            <button type="submit">Submit Form</button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

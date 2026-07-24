@@ -7,7 +7,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Modal from '../Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
 import BooksForm from '../BooksForm/BooksForm';
-import NoDataScreen from '../../NoDataScreen/NoDataScreen';
+import NoDataScreen from '../NoDataScreen/NoDataScreen';
 import Pagination from '../Pagination/Pagination';
 
 export default function Books() {

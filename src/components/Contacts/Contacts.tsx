@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { getContacts } from '../../services/contactsApi';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useQuery } from "@tanstack/react-query";
+import { getContacts } from "../../services/contactsApi";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import AddContactForm from "../AddContactForm/AddContactForm";
 
 export default function Contacts() {
   const {
@@ -9,16 +10,17 @@ export default function Contacts() {
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ['contacts'],
+    queryKey: ["contacts"],
     queryFn: getContacts,
   });
 
   return (
     <>
+      <AddContactForm />
       <ul>
         {contacts &&
           contacts.length > 0 &&
-          contacts.map(contact => (
+          contacts.map((contact) => (
             <li key={contact.id}>
               <p>{contact.name}</p>
               <p>{contact.city}</p>
