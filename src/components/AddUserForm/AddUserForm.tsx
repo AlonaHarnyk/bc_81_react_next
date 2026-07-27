@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 
 import css from "./AddUserForm.module.css";
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addUser } from "../../services/usersApi";
 import type { UserData } from "../../types";
 
@@ -34,11 +34,11 @@ export default function AddUserForm({ onClose }: AddUserFormProps) {
 
   const { mutate } = useMutation({
     mutationFn: addUser,
-    onSuccess: () =>{
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users"]
-      })
-    }
+        queryKey: ["users"],
+      });
+    },
   });
 
   const handleSubmit = (values: FormValues) => {

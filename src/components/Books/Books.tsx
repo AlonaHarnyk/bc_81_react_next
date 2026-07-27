@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import BooksForm from '../BooksForm/BooksForm';
 import NoDataScreen from '../NoDataScreen/NoDataScreen';
 import Pagination from '../Pagination/Pagination';
+import AddBookForm from '../AddBookForm/AddBookForm';
 
 export default function Books() {
   const [modalContent, setModalContent] = useState<string | null>(null);
@@ -50,6 +51,7 @@ export default function Books() {
       )}
 
       <BooksForm onSerch={onSearch} />
+      <AddBookForm />
       {books && books.length > 0 && !isLoading ? (
         <BooksList books={books} onOpenModal={openModal} />
       ) : (
