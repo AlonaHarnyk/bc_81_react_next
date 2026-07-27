@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { getUsers } from "../../services/usersApi";
-import Button from "../Button/Button";
-import UserList from "../UserList/UserList";
-import Loader from "../Loader/Loader";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import AddUserForm from "../AddUserForm/AddUserForm";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from 'react';
+import { getUsers } from '../../services/usersApi';
+import Button from '../Button/Button';
+import UserList from '../UserList/UserList';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import AddUserForm from '../AddUserForm/AddUserForm';
+import { useQuery } from '@tanstack/react-query';
 
 export default function Users() {
   const [isShowForm, setIsShowForm] = useState(false);
@@ -17,7 +17,7 @@ export default function Users() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ['users'],
     queryFn: getUsers,
     enabled: isListShown,
   });
@@ -66,3 +66,6 @@ export default function Users() {
     </>
   );
 }
+
+// Додати компоненту UserItem параграф, в якому виводити інформацію про те, чи користувач онлайн.
+// Додати компоненту UserItem кнопку Toggle status, ми натисанні на яку на бекенд має відправлятись put-запит для зміни статусу на протилежний.

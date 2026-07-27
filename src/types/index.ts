@@ -11,6 +11,10 @@ export interface UserData {
   isOnline: boolean;
 }
 
+export interface OnlineData {
+  isOnline: boolean;
+}
+
 export interface Book {
   author: string;
   title: string;
