@@ -5,6 +5,12 @@ export interface User {
   id: string;
 }
 
+export interface UserData {
+  name: string;
+  email: string;
+  isOnline: boolean;
+}
+
 export interface Book {
   author: string;
   title: string;
