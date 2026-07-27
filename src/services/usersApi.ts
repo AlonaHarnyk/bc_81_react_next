@@ -9,3 +9,8 @@ export async function getUsers(): Promise<User[]> {
   const { data } = await userApi.get<User[]>("/users");
   return data;
 }
+
+export const deleteUser = async (id: string): Promise<User> => {
+  const { data } = await userApi.delete<User>(`/users/${id}`);
+  return data;
+};
