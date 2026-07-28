@@ -44,7 +44,7 @@ export default function UserList({ users }: UserListProps) {
         <li key={user.id}>
           <p>{user.name}</p>
           <p>{user.email}</p>
-          <p>{String(user.isOnline)}</p>
+          {user.isOnline ? <p>{`Online : Yes`}</p> : <p>{`Online : No`}</p>}
           <Button
             type="button"
             textContent="Delete"

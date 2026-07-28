@@ -1,7 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Book } from "../../types";
-import Button from "../Button/Button";
-import { deleteBook } from "../../services/booksApi";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { Book } from '../../types';
+import Button from '../Button/Button';
+import { deleteBook } from '../../services/booksApi';
+import { useState } from 'react';
+import BookFormEdit from '../BookFormEdit/BookFormEdit';
 
 interface BooksItemProps {
   book: Book;
@@ -9,16 +11,17 @@ interface BooksItemProps {
 }
 
 export default function BooksItem({ book, onOpenModal }: BooksItemProps) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: deleteBook,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["books"],
+        queryKey: ['books'],
       });
     },
-    onError: (e) => {
+    onError: e => {
       console.log(e);
     },
   });
@@ -29,6 +32,10 @@ export default function BooksItem({ book, onOpenModal }: BooksItemProps) {
 
   const handleOpenModal = () => {
     onOpenModal(book.description);
+  };
+
+  const toggleEditForm = () => {
+    setIsFormOpen(!isFormOpen);
   };
 
   return (
@@ -42,6 +49,14 @@ export default function BooksItem({ book, onOpenModal }: BooksItemProps) {
         handleClick={handleOpenModal}
       />
       <Button type="button" textContent="Delete" handleClick={handleDelete} />
+      <Button
+        type="button"
+        textContent={isFormOpen ? 'Close Edit' : 'Open Edit'}
+        handleClick={toggleEditForm}
+      />
+      {isFormOpen && (
+        <BookFormEdit bookToEdit={book} onClose={toggleEditForm} />
+      )}
     </>
   );
 }

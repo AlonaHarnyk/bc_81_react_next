@@ -30,3 +30,8 @@ export const addBook = async (book: BookData): Promise<Book> => {
   const { data } = await booksApi.post<Book>("/books", book);
   return data;
 };
+
+export const editBook = async (book: Book): Promise<Book> => {
+  const { data } = await booksApi.put<Book>(`/books/${book.id}`, book);
+  return data;
+}
