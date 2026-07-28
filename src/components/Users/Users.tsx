@@ -1,26 +1,30 @@
-import { useState } from 'react';
-import { getUsers } from '../../services/usersApi';
-import Button from '../Button/Button';
-import UserList from '../UserList/UserList';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import AddUserForm from '../AddUserForm/AddUserForm';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from "react";
+import { getUsers } from "../../services/usersApi";
+import Button from "../Button/Button";
+import UserList from "../UserList/UserList";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import AddUserForm from "../AddUserForm/AddUserForm";
+import { useQuery } from "@tanstack/react-query";
+import UserSearch from "../UserSearch/UserSearch";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Users() {
   const [isShowForm, setIsShowForm] = useState(false);
-
   const [isListShown, setIsListShown] = useState(false);
+  const [query, setQuery] = useState("");
 
   const {
     data: users,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['users'],
-    queryFn: getUsers,
+    queryKey: ["users", query],
+    queryFn: () => getUsers(query),
     enabled: isListShown,
   });
+
+  const onSearch = useDebouncedCallback(setQuery, 500);
 
   const showUsers = () => {
     setIsListShown(true);
@@ -38,6 +42,7 @@ export default function Users() {
     <>
       {isListShown ? (
         <>
+          <UserSearch query={query} onSearch={onSearch} />
           {users && users.length > 0 && (
             <>
               <UserList users={users} />

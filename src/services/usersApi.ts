@@ -5,8 +5,12 @@ const userApi = axios.create({
   baseURL: "https://6240d2109b450ae274385b44.mockapi.io/api",
 });
 
-export async function getUsers(): Promise<User[]> {
-  const { data } = await userApi.get<User[]>("/users");
+export async function getUsers(search: string): Promise<User[]> {
+  const { data } = await userApi.get<User[]>("/users", {
+    params: {
+      search,
+    },
+  });
   return data;
 }
 
@@ -25,7 +29,10 @@ interface UpdateUserStatusParams {
   id: string;
 }
 
-export const toggleUserStatus = async ({ onlineData, id }: UpdateUserStatusParams): Promise<User> => {
+export const toggleUserStatus = async ({
+  onlineData,
+  id,
+}: UpdateUserStatusParams): Promise<User> => {
   const { data } = await userApi.put<User>(`/users/${id}`, onlineData);
   return data;
-}
+};
