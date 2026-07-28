@@ -6,10 +6,12 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Modal from '../Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
-import BooksForm from '../BooksForm/BooksForm';
+// import BooksForm from '../BooksForm/BooksSearch';
 import NoDataScreen from '../NoDataScreen/NoDataScreen';
 import Pagination from '../Pagination/Pagination';
 import AddBookForm from '../AddBookForm/AddBookForm';
+import BooksSearch from '../BooksForm/BooksSearch';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Books() {
   const [modalContent, setModalContent] = useState<string | null>(null);
@@ -20,10 +22,15 @@ export default function Books() {
     setModalContent(description);
   };
 
-  const onSearch = (query: string) => {
+  const onSearchDebounced = useDebouncedCallback((query: string) => {
     setQuery(query);
     setCurrentPage(1);
-  };
+  }, 500);
+
+  // const onSearch = (query: string) => {
+  //   setQuery(query);
+  //   setCurrentPage(1);
+  // };
 
   const {
     data: books,
@@ -50,7 +57,7 @@ export default function Books() {
         />
       )}
 
-      <BooksForm onSerch={onSearch} />
+      <BooksSearch onSearch={onSearchDebounced} query={query} />
       <AddBookForm />
       {books && books.length > 0 && !isLoading ? (
         <BooksList books={books} onOpenModal={openModal} />
