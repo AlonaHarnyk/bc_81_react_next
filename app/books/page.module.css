@@ -1,0 +1,8 @@
+.title {
+  color: rgb(165, 42, 42);
+}
+
+.innerWrapper {
+  background-color: rgb(255, 135, 135);
+  outline: 2px solid rgb(255, 58, 58);
+}
