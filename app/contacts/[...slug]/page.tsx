@@ -1,6 +1,6 @@
-import ContactsList from "@/components/ContactsList/ContactsList";
-import { getContacts } from "@/lib/services/contactsApi";
-import { getContactsCategory } from "@/lib/utils/contacts";
+import ContactsList from '@/components/ContactsList/ContactsList';
+import { getContacts } from '@/lib/services/contactsApi';
+import { getContactsCategory } from '@/lib/utils/contacts';
 
 interface ContactsCategoriesPageProps {
   params: Promise<{ slug: string[] }>;

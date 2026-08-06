@@ -9,3 +9,8 @@ export async function getUsers(): Promise<User[]> {
   const { data } = await userApi.get<User[]>('/users');
   return data;
 }
+
+export async function getUserById(id: string): Promise<User> {
+  const { data } = await userApi.get<User>(`/users/${id}`);
+  return data;
+}
