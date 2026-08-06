@@ -16,7 +16,7 @@ export default function Navigation() {
           </Link>
         </li>
         <li>
-          <Link href="/contacts" className={css.link}>
+          <Link href="/contacts/all" className={css.link}>
             Contacts
           </Link>
         </li>
