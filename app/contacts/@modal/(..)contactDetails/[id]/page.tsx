@@ -1,10 +1,10 @@
-import ContactDetailsClient from '@/app/contactDetails/[id]/ContactDetails.client';
 import { getContactById } from '@/lib/services/contactsApi';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import ContactDetailsSlotClient from './ContactDetailsSlot.client';
 
 interface ContactDetailsSlot {
   params: Promise<{ id: string }>;
@@ -24,7 +24,7 @@ export default async function ContactDetailsSlot({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ContactDetailsClient />
+      <ContactDetailsSlotClient />
     </HydrationBoundary>
   );
 }
