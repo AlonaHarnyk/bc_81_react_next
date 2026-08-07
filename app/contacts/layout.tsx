@@ -1,16 +1,21 @@
-import ContactsCategories from "@/components/ContactsCategories/ContactsCategories";
-
-import css from "./page.module.css";
+import css from './page.module.css';
 
 interface ContactsLayoutProps {
   children: React.ReactNode;
+  sidebar: React.ReactNode;
+  modal: React.ReactNode;
 }
 
-export default function ContactsLayout({ children }: ContactsLayoutProps) {
+export default function ContactsLayout({
+  children,
+  sidebar,
+  modal,
+}: ContactsLayoutProps) {
   return (
     <div className={css.container}>
-      <ContactsCategories />
+      {sidebar}
       {children}
+      {modal}
     </div>
   );
 }
