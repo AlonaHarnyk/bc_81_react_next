@@ -1,7 +1,17 @@
-import { getBooks } from "@/lib/services/booksApi";
-import css from "./page.module.css";
-import BooksList from "@/components/BooksList/BooksList";
-import Container from "@/components/Container/Container";
+import { getBooks } from '@/lib/services/booksApi';
+import css from './page.module.css';
+import BooksList from '@/components/BooksList/BooksList';
+import Container from '@/components/Container/Container';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: `Books List: `,
+  description: `Book List with title and author`,
+  openGraph: {
+    title: `Books List: `,
+    description: `Book List with title and author`,
+  },
+};
 
 export default async function Books() {
   const books = await getBooks();

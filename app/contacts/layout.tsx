@@ -6,8 +6,6 @@ interface ContactsLayoutProps {
   modal: React.ReactNode;
 }
 
-
-
 export default function ContactsLayout({
   children,
   sidebar,
