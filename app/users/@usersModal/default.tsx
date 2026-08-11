@@ -1,3 +1,3 @@
 export default function UsersModal() {
-  return null;
+  return <p>UsersModal</p>;
 }

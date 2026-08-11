@@ -1,16 +1,17 @@
 .backdrop {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.208);
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.208);
 }
 
-.modal{
-    width: 70vw;
-    height: 70vh;
-    background-color: rgb(199, 134, 134);
+.modal {
+  width: 70vw;
+  height: 70vh;
+  background-color: rgb(199, 134, 134);
 }

@@ -1,9 +1,11 @@
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
 // import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div>
+      <Link href={`/books/create`}>Create Book</Link>
       <h2>Home</h2>
       <Image src="/cat.jpg" alt="Cat image" width={300} height={300} />
       <Image
