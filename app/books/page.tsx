@@ -3,6 +3,7 @@ import css from './page.module.css';
 import BooksList from '@/components/BooksList/BooksList';
 import Container from '@/components/Container/Container';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: `Books List: `,
@@ -20,6 +21,7 @@ export default async function Books() {
     <Container>
       <div className={css.innerWrapper}>
         <h2 className={css.title}>Books</h2>
+        <Link href={`/books/create`}>Create Book</Link>
         <BooksList books={books} />
       </div>
     </Container>
