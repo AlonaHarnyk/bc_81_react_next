@@ -4,3 +4,8 @@ export interface User {
   isOnline: boolean;
   id: string;
 }
+
+export interface UserDraft {
+  name: string;
+  email: string;
+}
